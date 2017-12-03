@@ -1,0 +1,87 @@
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "com.ilyzs.config"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        flavorDimensions("channel")
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary= true
+    }
+
+    signingConfigs{
+        release {
+            storeFile file('./keystore/release.keystore')
+            storePassword 'testres'
+            keyAlias 'testres'
+            keyPassword 'testres'
+        }
+        debug{
+            storeFile file('./keystore/debug.keystore')
+        }
+    }
+
+    productFlavors{
+        qh360{
+            applicationId "cn.ilyzh.config.qh360"
+            resValue("string", "app_name_qh360", "Config_qh360")
+            manifestPlaceholders = [label: "@string/app_name_qh360",icon: "@Mi"]
+        }
+        xiaomi{
+            resValue("string", "title_home", "home_xiaomi")
+        }
+        baidu{ }
+        huawei{ }
+        oppo{ }
+        vivo{ }
+        yingyongbao{ }
+    }
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE : name]
+    }
+
+    android.applicationVariants.all {
+        variant -> variant.outputs.all {
+            def appName = "config"
+            def date = new Date()
+            def formattedDate = date.format('yyMMdd_HHmm')
+            outputFileName = appName+"_${variant.name}_${variant.versionName}_"+formattedDate+".apk"
+        }
+    }
+
+
+
+    buildTypes {
+        debug{
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:support-vector-drawable:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
