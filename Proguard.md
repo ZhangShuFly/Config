@@ -39,6 +39,7 @@ Proguard除了混淆之后，还有压缩、优化、预检的作用。
 **app/proguard-rules.pro** 
 
     命令	|   作用
+    ------------- | -------------  
     -keep	|   防止类和成员被移除或者被重命名
     -keepnames  | 	防止类和成员被重命名
     -keepclassmembers   |	防止成员被移除或者被重命名
