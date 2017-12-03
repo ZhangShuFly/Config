@@ -232,4 +232,4 @@ gradle 3.0版本中需要修改：
 
 ###  Walle快速打包方式  ###
 
-[点击进入Walle](https://github.com/ZhangShuFly/TinkerDemo)
+[点击进入Walle](https://github.com/ZhangShuFly/TinkerDemo/blob/master/Walle.md)
