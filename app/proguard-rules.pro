@@ -31,6 +31,7 @@
 #-keep class 你的类所在的包.** { *; }
 
 #如果是内部类的话，你可以这样
+
 #-keepclasseswithmembers class 你的类所在的包.父类$子类 { <methods>; }
 
 #例如

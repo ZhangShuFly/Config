@@ -1,6 +1,10 @@
 
 ## 多渠道打包
 
+[proguard混淆](Proguard.md)
+
+[Walle多渠道打包](https://github.com/ZhangShuFly/TinkerDemo/blob/master/Walle.md)
+
 ### 1、 Flavor方式
 
 实现多渠道打包，根据App名称、渠道名称、版本号、打包方式、日期 重命名输出的apk名字。
@@ -40,7 +44,7 @@ productFlavors.all {    }  ： 将定义的渠道名称动态赋值
 android.applicationVariants.all {   }   ： 动态设置apk包的名称
 
 flavorDimensions(   )   ：  gradle3.0 需要设置的，不然会报错。All flavors must now belong to a named flavor dimension. 
-       
+```       
         android{
             ...
             defaultConfig {
@@ -72,7 +76,7 @@ flavorDimensions(   )   ：  gradle3.0 需要设置的，不然会报错。All f
             }
             ...
          }
-
+```
 **打包操作**
 
 在build - Generate Signed apk 时复选所有渠道，并勾选V2.
@@ -101,7 +105,7 @@ flavorDimensions(   )   ：  gradle3.0 需要设置的，不然会报错。All f
 **实现二**
      
 在java代码中获取AndroidManifest.xml中配置的渠道信息，不同渠道执行不同的代码。
-
+```
         try {
                 ApplicationInfo applicationInfo = this.getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
                 String channelValue = applicationInfo.metaData.getString("CHANNEL");
@@ -125,7 +129,7 @@ flavorDimensions(   )   ：  gradle3.0 需要设置的，不然会报错。All f
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
-
+```
      
 #### 遇到问题
 
@@ -144,19 +148,19 @@ Error:All flavors must now belong to a named flavor dimension.
 解决办法
 
 gradel 3.0需要设置的
-
+```
         defaultConfig {
             ...
             flavorDimensions("channel")
             ...
         }
-        
+```
 问题3
         
 Cannot set the value of read-only property 'outputFile' 
 
 解决办法
-
+```
     applicationVariants.all { variant -> 
         variant.outputs.each { output ->
             def SEP = "_"
@@ -171,14 +175,13 @@ Cannot set the value of read-only property 'outputFile'
             output.outputFile = file
         }
     }
-    
-    
+```    
 gradle 3.0版本中需要修改：
 
   1.Use all() instead of each()
 
   2.Use outputFileName instead of output.outputFile if you change only file name (that is your case)
-
+```
         android.applicationVariants.all {
             variant -> variant.outputs.all {
                 def appName = "config"
@@ -187,7 +190,7 @@ gradle 3.0版本中需要修改：
                 outputFileName = appName+"_${variant.name}_${variant.versionName}_"+formattedDate+".apk"
             }
         }
- 
+``` 
  
 ### 2、 360加固、爱加密、腾讯云·乐固等第三方加密工具方式
 
@@ -232,4 +235,7 @@ gradle 3.0版本中需要修改：
 
 ###  Walle快速打包方式  ###
 
-[点击进入Walle](https://github.com/ZhangShuFly/TinkerDemo/blob/master/Walle.md)
+[点击进 入Walle](https://github.com/ZhangShuFly/TinkerDemo/blob/master/Walle.md)
+
+
+
