@@ -236,7 +236,7 @@ gradle 3.0版本中需要修改：
  
  ![腾讯云乐固渠道配置](assets/qdpz_txylg.png)
 
-###  Walle快速打包方式  ###
+###  3、Walle快速打包方式  ###
 
 [点击进 入Walle](https://github.com/ZhangShuFly/TinkerDemo/blob/master/Walle.md)
 
