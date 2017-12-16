@@ -1,28 +1,31 @@
 
 ## 多渠道打包
 
-[proguard混淆](Proguard.md)
 
-[Walle多渠道打包](https://github.com/ZhangShuFly/TinkerDemo/blob/master/Walle.md)
+### 相关阅读
+
+1   [proguard混淆](Proguard.md)
+
+2   [Walle多渠道打包](https://github.com/ZhangShuFly/TinkerDemo/blob/master/Walle.md)
 
 ### 1、 Flavor方式
 
-实现多渠道打包，根据App名称、渠道名称、版本号、打包方式、日期 重命名输出的apk名字。
+>>>实现多渠道打包，根据App名称、渠道名称、版本号、打包方式、日期 重命名输出的apk名字。
 
-#### Tip
+#### 1.1 Tip
 
 1 渠道多了比较慢
 
 2 不同渠道可以拥有不同的类、资源、jar包
 
 
-#### 多渠道打包及输出sdk文件重命名
+#### 1.2 多渠道打包及输出sdk文件重命名
 
-**需求**
+*需求*
 
 为了统计不同渠道的推广效果，在上线之前，常常会给不同渠道打不同的apk包，渠道多了人工打包效率低下，所以才需要多渠道的自动打包，最好能让运营人员根据apk的名字，知道渠道、版本等一些列信息。
 
-**实现**
+*实现*
 
 **AndroidManifest.xml** 
 
@@ -77,13 +80,13 @@ flavorDimensions(   )   ：  gradle3.0 需要设置的，不然会报错。All f
             ...
          }
 ```
-**打包操作**
+*打包操作*
 
 在build - Generate Signed apk 时复选所有渠道，并勾选V2.
        
 ![选择所有渠道](assets/build_apk.png)
          
-#### 不同版本定制化资源和代码
+#### 1.3 不同版本定制化资源和代码
          
 **需求**
          
@@ -131,7 +134,7 @@ flavorDimensions(   )   ：  gradle3.0 需要设置的，不然会报错。All f
             }
 ```
      
-#### 遇到问题
+#### 1.4 遇到问题
 
 问题1
 
@@ -196,11 +199,11 @@ gradle 3.0版本中需要修改：
 
 通过第三方加固平台进行加固，并输出多渠道包。
 
-#### Tip ####
+#### 2.1 Tip ####
 
 不建议将360加固之后的apk传到其它渠道
 
-#### 介绍
+#### 2.2 介绍 
 
 **需求**
 
